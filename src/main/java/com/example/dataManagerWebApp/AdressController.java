@@ -33,6 +33,8 @@ public class AdressController {
     public Adress updateAdress(@RequestBody Adress updatedAdress){
         Adress adress = PersonStorage.getAdressById(updatedAdress.getId());
         adress.setCity(updatedAdress.getCity());
+        adress.setStreet(updatedAdress.getStreet());
+        adress.setStreetNumber(updatedAdress.getStreetNumber());
         adress.setPermanentAdress(updatedAdress.isPermanentAdress());
         adress.setContacts(updatedAdress.getContacts());
         PersonStorage.saveAdress(adress);

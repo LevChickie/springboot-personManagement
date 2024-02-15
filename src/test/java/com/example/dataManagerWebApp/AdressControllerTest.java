@@ -55,8 +55,13 @@ public class AdressControllerTest {
         assertEquals(adresses.size(), actualAdresses.size());
         for (int i = 0; i < adresses.size(); i++){
             assertEquals(adresses.get(i).getId(),actualAdresses.get(i).getId());
+
             assertEquals(adresses.get(i).getCity(),actualAdresses.get(i).getCity());
+            assertEquals(adresses.get(i).getStreet(),actualAdresses.get(i).getStreet());
+            assertEquals(adresses.get(i).getStreetNumber(),actualAdresses.get(i).getStreetNumber());
+
             assertEquals(adresses.get(i).getContacts().size(),actualAdresses.get(i).getContacts().size());
+
             List<String> keys = adresses.get(i).getContacts().keySet().stream().toList();
             List<String> actualKeys = actualAdresses.get(i).getContacts().keySet().stream().toList();
             for(int j = 0; j < adresses.get(i).getContacts().size();j++){
@@ -74,7 +79,10 @@ public class AdressControllerTest {
         ResultActions request = mockMvc.perform(get("/adress/"+id)).andDo(print()).andExpect(status().isOk());
         Adress actualAdress = objectMapper.readValue(request.andReturn().getResponse().getContentAsString(), Adress.class);
         assertEquals(adress.getId(), actualAdress.getId());
+
         assertEquals(adress.getCity(), actualAdress.getCity());
+        assertEquals(adress.getStreet(), actualAdress.getStreet());
+        assertEquals(adress.getStreetNumber(), actualAdress.getStreetNumber());
     }
 
     @Test
@@ -87,7 +95,7 @@ public class AdressControllerTest {
     void testCreateAdress() throws Exception {
         int numberOfAdressesBefore = PersonStorage.getAllAdresses().size();
         String id = "sampleId";
-        Adress adress = new Adress(id,"Szolnok", true);
+        Adress adress = new Adress(id,"Szolnok", "Szolnoki út", "1", true);
         Contact newContact = new Contact("c"+(PersonStorage.getAllContacts().size()+1), "telephone","+36201119999");
         adress.addContact(newContact);
         String jsonAdress = asJsonString(adress);
@@ -107,7 +115,7 @@ public class AdressControllerTest {
         int nextId = sizeBeforeUpdate+1;
         String id = PersonStorage.getAllAdresses().get(0).getId();
         Adress adress = PersonStorage.getAdressById(id);
-        Adress adressCopied = new Adress(adress.getId(),adress.getCity(),adress.isPermanentAdress());
+        Adress adressCopied = new Adress(adress.getId(),adress.getCity(),adress.getStreet(), adress.getStreetNumber(), adress.isPermanentAdress());
         adressCopied.setContacts(adress.getContacts());
         adressCopied.setCity("New York");
         String jsonAdress = asJsonString(adressCopied);
@@ -115,8 +123,13 @@ public class AdressControllerTest {
                 .content(jsonAdress)).andDo(print()).andExpect(status().isOk());
         Adress actualAdress = objectMapper.readValue(request.andReturn().getResponse().getContentAsString(), Adress.class);
         assertEquals(PersonStorage.getAllAdresses().size(), sizeBeforeUpdate);
+
         assertEquals(actualAdress.getId(), PersonStorage.getAdressById(id).getId());
+
         assertEquals(actualAdress.getCity(), PersonStorage.getAdressById(id).getCity());
+        assertEquals(actualAdress.getStreet(), PersonStorage.getAdressById(id).getStreet());
+        assertEquals(actualAdress.getStreetNumber(), PersonStorage.getAdressById(id).getStreetNumber());
+
         assertEquals("New York", actualAdress.getCity());
         assertEquals("New York", PersonStorage.getAdressById(id).getCity());
         assertEquals(200, request.andReturn().getResponse().getStatus());

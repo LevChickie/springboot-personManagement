@@ -30,7 +30,7 @@ public class ContactController {
     }
 
     @PutMapping("/contact")
-    public Contact updateAdress(@RequestBody Contact updatedContact){
+    public Contact updateContact(@RequestBody Contact updatedContact){
         Contact contact = PersonStorage.getContactById(updatedContact.getId());
         contact.setContactType(updatedContact.getContactType());
         contact.setContact(updatedContact.getContact());

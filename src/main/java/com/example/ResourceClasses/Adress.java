@@ -14,9 +14,11 @@ public class Adress {
 
     private Map<String,Contact> contacts;
 
-    public Adress(String id, String city, boolean permanentAdress){
+    public Adress(String id, String city, String street, String streetNumber,  boolean permanentAdress){
         this.id = id;
         this.city = city;
+        this.street = street;
+        this.streetNumber = streetNumber;
         this.permanentAdress = permanentAdress;
         this.contacts = new HashMap<>();
     }
