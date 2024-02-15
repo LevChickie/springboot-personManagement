@@ -72,10 +72,10 @@ public class PersonStorage {
         Person person2 = new Person("p2","M. Mark");
         Person person3 = new Person("p3","K. Krisztian");
 
-        Adress adress1 = new Adress("a1","Budapest", "Csángó utca", "20/B", true);
+        Adress adress1 = new Adress("a1","Budapest", "Csango utca", "20/B", true);
         Adress adress2 = new Adress("a2", "Debrecen", "Kossuth utca", "20", false);
-        Adress adress3 = new Adress("a3","Mezokovesd", "Széchenyi utca", "11", true);
-        Adress adress4 = new Adress("a4","Gyor", "Széchenyi utca", "1", false);
+        Adress adress3 = new Adress("a3","Mezokovesd", "Szechenyi utca", "11", true);
+        Adress adress4 = new Adress("a4","Gyor", "Szechenyi utca", "1", false);
 
         Contact contact1 = new Contact("c1","telephone","+36201111111");
         Contact contact2 = new Contact("c2","email","xy@exampleemail.com");
