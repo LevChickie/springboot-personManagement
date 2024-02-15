@@ -2,7 +2,6 @@ package com.example.dataManagerWebApp;
 
 import com.example.ResourceClasses.Adress;
 import com.example.ResourceClasses.Contact;
-import com.example.ResourceClasses.Person;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

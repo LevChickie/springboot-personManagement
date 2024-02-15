@@ -3,7 +3,6 @@ package com.example.dataManagerWebApp;
 import com.example.ResourceClasses.Person;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

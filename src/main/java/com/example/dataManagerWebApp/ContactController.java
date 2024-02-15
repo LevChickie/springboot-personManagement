@@ -1,6 +1,5 @@
 package com.example.dataManagerWebApp;
 
-import com.example.ResourceClasses.Adress;
 import com.example.ResourceClasses.Contact;
 import org.springframework.web.bind.annotation.*;
 
