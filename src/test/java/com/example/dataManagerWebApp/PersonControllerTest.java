@@ -97,7 +97,6 @@ public class PersonControllerTest {
         String jsonPerson = asJsonString(personCopied);
         ResultActions request = mockMvc.perform(put("/person").contentType(MediaType.APPLICATION_JSON)
                 .content(jsonPerson)).andDo(print()).andExpect(status().isOk());
-        //.andExpect(MockMvcResultMatchers.jsonPath("$.color").value("red"));
         Person actualPerson = objectMapper.readValue(request.andReturn().getResponse().getContentAsString(), Person.class);
         assertEquals(PersonStorage.getAllPeople().size(), sizeBeforeUpdate);
         assertEquals(actualPerson.getId(), PersonStorage.getPersonById(id).getId());

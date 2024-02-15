@@ -113,7 +113,6 @@ public class AdressControllerTest {
         String jsonAdress = asJsonString(adressCopied);
         ResultActions request = mockMvc.perform(put("/adress").contentType(MediaType.APPLICATION_JSON)
                 .content(jsonAdress)).andDo(print()).andExpect(status().isOk());
-        //.andExpect(MockMvcResultMatchers.jsonPath("$.color").value("red"));
         Adress actualAdress = objectMapper.readValue(request.andReturn().getResponse().getContentAsString(), Adress.class);
         assertEquals(PersonStorage.getAllAdresses().size(), sizeBeforeUpdate);
         assertEquals(actualAdress.getId(), PersonStorage.getAdressById(id).getId());

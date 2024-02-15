@@ -103,7 +103,6 @@ public class ContactControllerTest {
         String jsonContact = asJsonString(contactCopied);
         ResultActions request = mockMvc.perform(put("/contact").contentType(MediaType.APPLICATION_JSON)
                 .content(jsonContact)).andDo(print()).andExpect(status().isOk());
-        //.andExpect(MockMvcResultMatchers.jsonPath("$.color").value("red"));
         Contact actualContact = objectMapper.readValue(request.andReturn().getResponse().getContentAsString(), Contact.class);
         assertEquals(PersonStorage.getAllContacts().size(), sizeBeforeUpdate);
         assertEquals(actualContact.getId(), PersonStorage.getContactById(id).getId());
