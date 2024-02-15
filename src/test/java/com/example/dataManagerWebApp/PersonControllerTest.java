@@ -50,8 +50,23 @@ public class PersonControllerTest {
                 Person[].class)).collect(Collectors.toList());
         assertEquals(people.size(), actualPeople.size());
         for (int i = 0; i < people.size(); i++){
+
             assertEquals(people.get(i).getId(),actualPeople.get(i).getId());
             assertEquals(people.get(i).getName(),actualPeople.get(i).getName());
+
+            //Test if the adresses correct that belong to the person
+            if(people.get(i).getPermanentAdress() != null){
+                assertEquals(people.get(i).getPermanentAdress().getCity(),actualPeople.get(i).getPermanentAdress().getCity());
+                assertEquals(people.get(i).getPermanentAdress().getStreet(),actualPeople.get(i).getPermanentAdress().getStreet());
+                assertEquals(people.get(i).getPermanentAdress().getStreetNumber(),actualPeople.get(i).getPermanentAdress().getStreetNumber());
+
+            }
+            if(people.get(i).getTemporaryAdress() != null){
+                assertEquals(people.get(i).getTemporaryAdress().getCity(),actualPeople.get(i).getTemporaryAdress().getCity());
+                assertEquals(people.get(i).getTemporaryAdress().getStreet(),actualPeople.get(i).getTemporaryAdress().getStreet());
+                assertEquals(people.get(i).getTemporaryAdress().getStreetNumber(),actualPeople.get(i).getTemporaryAdress().getStreetNumber());
+
+            }
         }
     }
 
@@ -61,8 +76,23 @@ public class PersonControllerTest {
         Person person = PersonStorage.getPersonById(id);
         ResultActions request = mockMvc.perform(get("/person/"+id)).andDo(print()).andExpect(status().isOk());
         Person actualPerson = objectMapper.readValue(request.andReturn().getResponse().getContentAsString(), Person.class);
+
         assertEquals(person.getId(), actualPerson.getId());
         assertEquals(person.getName(), actualPerson.getName());
+
+        //Test if the adresses correct that belong to the person
+        if(person.getPermanentAdress() != null){
+            assertEquals(person.getPermanentAdress().getCity(),actualPerson.getPermanentAdress().getCity());
+            assertEquals(person.getPermanentAdress().getStreet(),actualPerson.getPermanentAdress().getStreet());
+            assertEquals(person.getPermanentAdress().getStreetNumber(),actualPerson.getPermanentAdress().getStreetNumber());
+
+        }
+        if(person.getTemporaryAdress() != null){
+            assertEquals(person.getTemporaryAdress().getCity(),actualPerson.getTemporaryAdress().getCity());
+            assertEquals(person.getTemporaryAdress().getStreet(),actualPerson.getTemporaryAdress().getStreet());
+            assertEquals(person.getTemporaryAdress().getStreetNumber(),actualPerson.getTemporaryAdress().getStreetNumber());
+
+        }
     }
 
     @Test
@@ -101,8 +131,24 @@ public class PersonControllerTest {
         assertEquals(PersonStorage.getAllPeople().size(), sizeBeforeUpdate);
         assertEquals(actualPerson.getId(), PersonStorage.getPersonById(id).getId());
         assertEquals(actualPerson.getName(), PersonStorage.getPersonById(id).getName());
+        //Check if the values stored are the updated values
         assertEquals("John Fawkes", actualPerson.getName());
         assertEquals("John Fawkes", PersonStorage.getPersonById(id).getName());
+
+        //Test if the adresses correct that belong to the person
+        if(actualPerson.getPermanentAdress() != null){
+            assertEquals(actualPerson.getPermanentAdress().getCity(),PersonStorage.getPersonById(id).getPermanentAdress().getCity());
+            assertEquals(actualPerson.getPermanentAdress().getStreet(),PersonStorage.getPersonById(id).getPermanentAdress().getStreet());
+            assertEquals(actualPerson.getPermanentAdress().getStreetNumber(),PersonStorage.getPersonById(id).getPermanentAdress().getStreetNumber());
+
+        }
+        if(actualPerson.getTemporaryAdress() != null){
+            assertEquals(actualPerson.getTemporaryAdress().getCity(),PersonStorage.getPersonById(id).getTemporaryAdress().getCity());
+            assertEquals(actualPerson.getTemporaryAdress().getStreet(),PersonStorage.getPersonById(id).getTemporaryAdress().getStreet());
+            assertEquals(actualPerson.getTemporaryAdress().getStreetNumber(),PersonStorage.getPersonById(id).getTemporaryAdress().getStreetNumber());
+
+        }
+
         assertEquals(200, request.andReturn().getResponse().getStatus());
     }
 
